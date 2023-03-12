@@ -1,14 +1,22 @@
 <?xml version="1.0"?>
-<robot name="myfirst" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="budget_roomba" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="dummy_inertia">
     <inertial>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/> 
       <mass value="0.1"/>
-      <inertia ixx="1e-3" ixy="1e-3" ixz="1e-3" iyy="1e-3" iyz="1e-3" izz="1e-3"/>
+      <inertia ixx="1e-2" ixy="0" ixz="0" iyy="1e-2" iyz="0" izz="1e-2"/>
     </inertial>
   </xacro:macro>
   <xacro:include filename="$(find br_description)/urdf/motion/diffdrive.xacro" />
-  
+  <xacro:include filename="$(find br_description)/urdf/sensors/imu.xacro" />
+  <xacro:include filename="$(find br_description)/urdf/sensors/raspberry_pi_camera_2_1.xacro" />
+  <xacro:include filename="$(find br_description)/urdf/sensors/rplidar_a1m8.xacro" />
+
+
+  <xacro:arg name="sim" default="true"/>
+
   <link name="base_link">
+
   </link>
 
   <joint name="base_link_to_main_body" type="fixed">
@@ -20,70 +28,30 @@
   <link name="main_body">
     <xacro:dummy_inertia/>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <origin rpy="0 0 0" xyz="-0.2 0 0.1"/>
       <geometry>
         <cylinder length="0.2" radius="0.3"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <origin rpy="0 0 0" xyz="-0.2 0 0.1"/>
       <geometry>
         <cylinder length="0.2" radius="0.3"/>
       </geometry>
     </collision>
   </link>
-
-  <joint name="main_body_to_wheel_left" type="continuous">
-    <parent link="main_body"/>
-    <child link="wheel_left"/>
-    <origin xyz="0.2 0.30 0.0" rpy="0 0 1.570796327"/>
-  </joint>
-
-  <link name="wheel_left">
-    <xacro:dummy_inertia/>
-
-    <visual>
-      <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
-      <geometry>
-        <cylinder length="0.05" radius="0.1"/>
-      </geometry>
-    </visual>
-    <collision>
-      <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
-      <geometry>
-        <cylinder length="0.05" radius="0.1"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <xacro:diffdrive sim="$(arg sim)"/>
-
-  <link name="wheel_right">
-    <xacro:dummy_inertia/>
-
-    <visual>
-      <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
-      <geometry>
-        <cylinder length="0.05" radius="0.1"/>
-      </geometry>
-    </visual>
-    <collision>
-      <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
-      <geometry>
-        <cylinder length="0.05" radius="0.1"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <joint name="main_body_to_back_ball" type="continuous">
+  <joint name="main_body_to_back_ball" type="fixed">
     <parent link="main_body"/>
     <child link="back_ball"/>
-    <origin xyz="-0.3 0 0" rpy="0 0 0"/>
+    <origin xyz="-0.5 0 0" rpy="0 0 0"/>
   </joint>
 
   <link name="back_ball">
-    <xacro:dummy_inertia/>
-
+    <inertial>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/> 
+      <mass value="0.5"/>
+      <inertia ixx="1e-2" ixy="0" ixz="0" iyy="1e-2" iyz="0" izz="1e-2"/>
+    </inertial>
     <visual>
       <origin rpy="0 0 0" xyz="0 0 -0.05 "/>
       <geometry>
@@ -97,5 +65,27 @@
       </geometry>
     </collision>
   </link>
+
+
+  <xacro:diffdrive sim="$(arg sim)"/>
+  <xacro:imu sim="$(arg sim)" sim_noise="0.01" parent="base_link">
+    <origin xyz="0 0 0.3" rpy="0 0 0"/>
+  </xacro:imu>
+
+  <xacro:raspberry_pi_camera_2_1 sim="$(arg sim)" sim_noise="0.01" parent="base_link">
+    <origin xyz="0 0 0.5" rpy="0 ${1.57 / 2} 0"/>
+  </xacro:raspberry_pi_camera_2_1>
+
+  <xacro:rplidar_a1m8 sim="$(arg sim)" sim_noise="0.01" parent="base_link">
+    <origin xyz="0 0 0.55" rpy="0 0 0"/>
+  </xacro:rplidar_a1m8>
+
+  
+
+
+
+
+
+ 
 
 </robot>
