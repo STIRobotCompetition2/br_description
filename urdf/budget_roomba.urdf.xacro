@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<robot name="myfirst">
+
+  <link name="base_link">
+  </link>
+
+  <joint name="base_link_to_main_body" type="fixed">
+    <parent link="base_link"/>
+    <child link="main_body"/>
+    <origin xyz="0 0 0.1"/>
+  </joint>
+
+  <link name="main_body">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.3"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.3"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="main_body_to_wheel_left" type="continuous">
+    <parent link="main_body"/>
+    <child link="wheel_left"/>
+    <origin xyz="0.2 0.30 0.0" rpy="0 0 1.570796327"/>
+  </joint>
+
+  <link name="wheel_left">
+    <visual>
+      <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="main_body_to_wheel_right" type="continuous">
+    <parent link="main_body"/>
+    <child link="wheel_right"/>
+    <origin xyz="0.2 -0.30 0.0" rpy="0 0 -1.570796327"/>
+  </joint>
+
+  <link name="wheel_right">
+    <visual>
+      <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="main_body_to_back_ball" type="continuous">
+    <parent link="main_body"/>
+    <child link="back_ball"/>
+    <origin xyz="-0.3 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="back_ball">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -0.05 "/>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.05 "/>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+</robot>
