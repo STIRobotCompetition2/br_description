@@ -6,6 +6,7 @@
       <inertia ixx="1e-3" ixy="1e-3" ixz="1e-3" iyy="1e-3" iyz="1e-3" izz="1e-3"/>
     </inertial>
   </xacro:macro>
+  <xacro:include filename="$(find br_description)/urdf/motion/diffdrive.xacro" />
   
   <link name="base_link">
   </link>
@@ -55,11 +56,7 @@
     </collision>
   </link>
 
-  <joint name="main_body_to_wheel_right" type="continuous">
-    <parent link="main_body"/>
-    <child link="wheel_right"/>
-    <origin xyz="0.2 -0.30 0.0" rpy="0 0 -1.570796327"/>
-  </joint>
+  <xacro:diffdrive sim="$(arg sim)"/>
 
   <link name="wheel_right">
     <xacro:dummy_inertia/>
