@@ -13,6 +13,18 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, "urdf"), glob('urdf/budget_roomba.urdf.xacro')),
+        (os.path.join('share', package_name, "urdf/motion"), glob('urdf/motion/diffdrive.xacro')),
+        (os.path.join('share', package_name, "urdf/sensors"), glob('urdf/sensors/imu.xacro')),
+        (os.path.join('share', package_name, "urdf/sensors"), glob('urdf/sensors/raspberry_pi_camera_2_1.xacro')),
+        (os.path.join('share', package_name, "urdf/sensors"), glob('urdf/sensors/rplidar_a1m8.xacro')),
+
+        (os.path.join('share', package_name, "meshes/sensors"), glob('meshes/sensors/raspberry_pi_camera_2_1.stl')),
+        (os.path.join('share', package_name, "meshes/sensors"), glob('meshes/sensors/rplidar_a1m8.stl')),
+
+
+
+
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,
