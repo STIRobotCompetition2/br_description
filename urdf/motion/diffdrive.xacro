@@ -3,7 +3,7 @@
   <joint name="main_body_to_wheel_left" type="continuous">
     <parent link="main_body"/>
     <child link="wheel_left"/>
-    <origin xyz="0.0 0.30 0.0" rpy="0 0 1.570796327"/>
+    <origin xyz="0.0 0.1 0.0" rpy="0 0 1.570796327"/>
     <calibration rising="0.0"/>
     <dynamics damping="0.0" friction="0.0"/>
     <limit effort="30" velocity="1.0" lower="-2.2" upper="0.7" />
@@ -16,13 +16,13 @@
     <visual>
       <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
       <geometry>
-        <cylinder length="0.05" radius="0.1"/>
+        <cylinder length="0.05" radius="0.05"/>
       </geometry>
     </visual>
     <collision>
       <origin rpy="0 1.570796327 0" xyz="0.025 0 0 "/>
       <geometry>
-        <cylinder length="0.05" radius="0.1"/>
+        <cylinder length="0.05" radius="0.05"/>
       </geometry>
     </collision>
   </link>
@@ -30,7 +30,7 @@
   <joint name="main_body_to_wheel_right" type="continuous">
     <parent link="main_body"/>
     <child link="wheel_right"/>
-    <origin xyz="0.0 -0.30 0.0" rpy="0 0 1.570796327"/>
+    <origin xyz="0.0 -0.1 0.0" rpy="0 0 1.570796327"/>
     <calibration rising="0.0"/>
     <dynamics damping="0.0" friction="0.0"/>
     <limit effort="30" velocity="1.0" lower="-2.2" upper="0.7" />
@@ -39,17 +39,19 @@
 
   <link name="wheel_right">
     <xacro:dummy_inertia/>
+    
 
     <visual>
       <origin rpy="0 1.570796327 0" xyz="-0.025 0 0 "/>
       <geometry>
-        <cylinder length="0.05" radius="0.1"/>
+        <cylinder length="0.05" radius="0.05"/>
       </geometry>
     </visual>
     <collision>
+   
       <origin rpy="0 1.570796327 0" xyz="-0.025 0 0 "/>
       <geometry>
-        <cylinder length="0.05" radius="0.1"/>
+        <cylinder length="0.05" radius="0.05"/>
       </geometry>
     </collision>
   </link>
@@ -67,13 +69,13 @@
             <!-- Name of right joint, defaults to `right_joint` -->
             <right_joint>main_body_to_wheel_right</right_joint>
             <!-- The distance from the center of one wheel to the other, in meters, defaults to 0.34 m -->
-            <wheel_separation>0.65</wheel_separation>
+            <wheel_separation>0.25</wheel_separation>
             <!-- Diameter of the wheels, in meters, defaults to 0.15 m -->
             <wheel_diameter>0.1</wheel_diameter>
             <!-- Wheel acceleration, in rad/s^2, defaults to 0.0 rad/s^2 -->
             <max_wheel_acceleration>1.0</max_wheel_acceleration>
             <!-- Maximum torque which the wheels can produce, in Nm, defaults to 5 Nm -->
-            <max_wheel_torque>1</max_wheel_torque>
+            <max_wheel_torque>5</max_wheel_torque>
             <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
             <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
             <odometryTopic>odom</odometryTopic>
@@ -90,10 +92,12 @@
             <publish_odom>False</publish_odom>
         </plugin>
     </gazebo>
-    <gazebo reference="back_ball">
-        <material>Gazebo/Black</material>
-        <mu1>0.0</mu1>
-        <mu2>0.0</mu2>
+    
+    <gazebo reference="wheel_right">
+        <material>Gazebo/Green</material>
+    </gazebo>
+    <gazebo reference="wheel_left">
+        <material>Gazebo/Red</material>
     </gazebo>
   </xacro:if>
 </xacro:macro>

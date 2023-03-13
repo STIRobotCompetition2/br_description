@@ -3,8 +3,8 @@
   <xacro:macro name="dummy_inertia">
     <inertial>
       <origin xyz="0 0 0.0" rpy="0 0 0"/> 
-      <mass value="0.1"/>
-      <inertia ixx="1e-2" ixy="0" ixz="0" iyy="1e-2" iyz="0" izz="1e-2"/>
+      <mass value="1e-2"/>
+      <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3"/>
     </inertial>
   </xacro:macro>
   <xacro:include filename="$(find br_description)/urdf/motion/diffdrive.xacro" />
@@ -22,49 +22,63 @@
   <joint name="base_link_to_main_body" type="fixed">
     <parent link="base_link"/>
     <child link="main_body"/>
-    <origin xyz="0 0 0.1"/>
+    <origin xyz="0 0 0.05"/>
   </joint>
 
   <link name="main_body">
-    <xacro:dummy_inertia/>
+    <inertial>
+      <origin xyz="0 0 0.0" rpy="0 0 0"/> 
+      <mass value="3"/>
+      <inertia ixx="1e-2" ixy="0" ixz="0" iyy="1e-2" iyz="0" izz="1e-2"/>
+    </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="-0.2 0 0.1"/>
+      <origin rpy="0 0 0" xyz="-0.1 0 0.15"/>
       <geometry>
-        <cylinder length="0.2" radius="0.3"/>
+        <cylinder length="0.2" radius="0.1"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="-0.2 0 0.1"/>
+      <origin rpy="0 0 0" xyz="-0.1 0 0.15"/>
       <geometry>
-        <cylinder length="0.2" radius="0.3"/>
+        <cylinder length="0.2" radius="0.1"/>
       </geometry>
     </collision>
   </link>
   <joint name="main_body_to_back_ball" type="fixed">
     <parent link="main_body"/>
     <child link="back_ball"/>
-    <origin xyz="-0.5 0 0" rpy="0 0 0"/>
+    <origin xyz="-0.3 0 0" rpy="0 0 0"/>
   </joint>
 
   <link name="back_ball">
     <inertial>
       <origin xyz="0 0 0.0" rpy="0 0 0"/> 
-      <mass value="0.5"/>
-      <inertia ixx="1e-2" ixy="0" ixz="0" iyy="1e-2" iyz="0" izz="1e-2"/>
+      <mass value="1e-1"/>
+      <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3"/>
     </inertial>
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 -0.05 "/>
+      <origin rpy="0 0 0" xyz="0 0 -0.025 "/>
       <geometry>
-        <sphere radius="0.05"/>
+        <sphere radius="0.025"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 -0.05 "/>
+      <origin rpy="0 0 0" xyz="0 0 -0.025 "/>
       <geometry>
-        <sphere radius="0.05"/>
+        <sphere radius="0.025"/>
       </geometry>
     </collision>
   </link>
+  <gazebo reference="back_ball">
+        
+        <material>Gazebo/Gold</material>
+        <mu1>0.0</mu1>
+        <mu2>0.0</mu2>
+    </gazebo>
+  <gazebo reference="main_body_to_back_ball">
+    <preserveFixedJoint>true</preserveFixedJoint>
+  </gazebo>
+  
 
 
   <xacro:diffdrive sim="$(arg sim)"/>
@@ -73,11 +87,11 @@
   </xacro:imu>
 
   <xacro:raspberry_pi_camera_2_1 sim="$(arg sim)" sim_noise="0.01" parent="base_link">
-    <origin xyz="0 0 0.5" rpy="0 ${1.57 / 2} 0"/>
+    <origin xyz="0 0 0.3" rpy="0 ${1.57 / 2} 0"/>
   </xacro:raspberry_pi_camera_2_1>
 
   <xacro:rplidar_a1m8 sim="$(arg sim)" sim_noise="0.01" parent="base_link">
-    <origin xyz="0 0 0.55" rpy="0 0 0"/>
+    <origin xyz="0 0 0.35" rpy="0 0 0"/>
   </xacro:rplidar_a1m8>
 
   
