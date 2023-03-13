@@ -10,7 +10,7 @@
             <visual>
                 <origin rpy="1.57 0 3.14" xyz="0 0 0.0"/>
                 <geometry>
-                    <mesh filename="$(find br_description)/meshes/sensors/rplidar_a1m8.stl" scale="1e-3 1e-3 1e-3"/>
+                    <mesh filename="file://$(find br_description)/meshes/sensors/rplidar_a1m8.stl" scale="1e-3 1e-3 1e-3"/>
                 </geometry>
             </visual>
             <collision>
