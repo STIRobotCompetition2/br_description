@@ -79,7 +79,7 @@
             <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
             <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
             <odometryTopic>odom</odometryTopic>
-            <publish_odom_tf>True</publish_odom_tf>
+            <publish_odom_tf>False</publish_odom_tf>
             <!-- Odometry frame, defaults to `odom` -->
             <odometry_frame>odom</odometry_frame>
             <!-- Robot frame to calculate odometry from, defaults to `base_footprint` -->

@@ -78,6 +78,15 @@
   <gazebo reference="main_body_to_back_ball">
     <preserveFixedJoint>true</preserveFixedJoint>
   </gazebo>
+  <gazebo>
+        <plugin name="budget_roomba_ros_plugin" filename="libbudget_roomba_ros_plugin.so">
+          <world_frame_id>world</world_frame_id>
+          <robot_base_frame_id>base_link</robot_base_frame_id>
+          <ground_truth_tf>true</ground_truth_tf>
+
+
+        </plugin>
+    </gazebo>
   
 
 
