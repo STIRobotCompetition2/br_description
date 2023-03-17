@@ -14,6 +14,8 @@
 
 
   <xacro:arg name="sim" default="true"/>
+  <xacro:arg name="ground_truth_tf" default="true"/>
+
 
   <link name="base_link">
 
@@ -69,24 +71,26 @@
       </geometry>
     </collision>
   </link>
-  <gazebo reference="back_ball">
-        
-        <material>Gazebo/Gold</material>
-        <mu1>0.0</mu1>
-        <mu2>0.0</mu2>
+  <xacro:if value="$(arg sim)">
+    <gazebo reference="back_ball">
+          
+          <material>Gazebo/Gold</material>
+          <mu1>0.0</mu1>
+          <mu2>0.0</mu2>
+      </gazebo>
+    <gazebo reference="main_body_to_back_ball">
+      <preserveFixedJoint>true</preserveFixedJoint>
     </gazebo>
-  <gazebo reference="main_body_to_back_ball">
-    <preserveFixedJoint>true</preserveFixedJoint>
-  </gazebo>
-  <gazebo>
-        <plugin name="budget_roomba_ros_plugin" filename="libbudget_roomba_ros_plugin.so">
-          <world_frame_id>world</world_frame_id>
-          <robot_base_frame_id>base_link</robot_base_frame_id>
-          <ground_truth_tf>true</ground_truth_tf>
-
-
-        </plugin>
-    </gazebo>
+    <xacro:if value="$(arg ground_truth_tf)">
+      <gazebo>
+            <plugin name="budget_roomba_ros_plugin" filename="libbudget_roomba_ros_plugin.so">
+              <world_frame_id>world</world_frame_id>
+              <robot_base_frame_id>base_link</robot_base_frame_id>
+              <ground_truth_tf>true</ground_truth_tf>
+            </plugin>
+      </gazebo>
+    </xacro:if>
+  </xacro:if>
   
 
 

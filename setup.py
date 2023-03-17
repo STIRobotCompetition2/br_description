@@ -20,6 +20,8 @@ setup(
 
         (os.path.join('share', package_name, "meshes/sensors"), glob('meshes/sensors/raspberry_pi_camera_2_1.stl')),
         (os.path.join('share', package_name, "meshes/sensors"), glob('meshes/sensors/rplidar_a1m8.stl')),
+        (os.path.join('share', package_name, "launch"), glob('launch/**')),
+
 
 
 

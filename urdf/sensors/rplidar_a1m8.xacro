@@ -1,5 +1,5 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="rplidar_a1m8" params="*origin sim sim_noise:=0.001 sim_lidar_topic:='/lidar/scan' sim_rate:=100 parent prefix:='lidar_'">
+    <xacro:macro name="rplidar_a1m8" params="*origin sim sim_noise:=0.001 sim_lidar_topic:='/lidar/scan' sim_rate:=30 parent prefix:='lidar_'">
         <joint name="${parent}_to_${prefix}base_link" type="fixed">
             <parent link="${parent}"/>
             <child link="${prefix}base_link"/>
@@ -10,7 +10,7 @@
             <visual>
                 <origin rpy="1.57 0 3.14" xyz="0 0 0.0"/>
                 <geometry>
-                    <mesh filename="file://$(find br_description)/meshes/sensors/rplidar_a1m8.stl" scale="1e-3 1e-3 1e-3"/>
+                    <mesh filename="$(find br_description)/meshes/sensors/rplidar_a1m8.stl" scale="1e-3 1e-3 1e-3"/>
                 </geometry>
             </visual>
             <collision>
