@@ -14,7 +14,7 @@
 
 
   <xacro:arg name="sim" default="true"/>
-  <xacro:arg name="ground_truth_tf" default="true"/>
+  <xacro:arg name="ground_truth_tf" default="false"/>
 
 
   <link name="base_link">
@@ -73,7 +73,6 @@
   </link>
   <xacro:if value="$(arg sim)">
     <gazebo reference="back_ball">
-          
           <material>Gazebo/Gold</material>
           <mu1>0.0</mu1>
           <mu2>0.0</mu2>
