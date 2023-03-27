@@ -75,7 +75,7 @@
             <!-- Wheel acceleration, in rad/s^2, defaults to 0.0 rad/s^2 -->
             <max_wheel_acceleration>1.0</max_wheel_acceleration>
             <!-- Maximum torque which the wheels can produce, in Nm, defaults to 5 Nm -->
-            <max_wheel_torque>5</max_wheel_torque>
+            <max_wheel_torque>25</max_wheel_torque>
             <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
             <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
             <odometryTopic>odom</odometryTopic>
@@ -89,15 +89,35 @@
             <!-- Set to true to publish transforms for the wheel links, defaults to false -->
             <publish_wheel_tf>True</publish_wheel_tf>
             <!-- Set to true to publish transforms for the odometry, defaults to true -->
-            <publish_odom>False</publish_odom>
+            <publish_odom>True</publish_odom>
         </plugin>
     </gazebo>
     
     <gazebo reference="wheel_right">
         <material>Gazebo/Green</material>
+        <collision>
+          <surface>
+            <friction>
+              <ode>
+              <mu>0.1</mu> 
+              <mu2>0.1</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
     </gazebo>
     <gazebo reference="wheel_left">
         <material>Gazebo/Red</material>
+        <collision>
+          <surface>
+            <friction>
+              <ode>
+              <mu>0.1</mu> 
+              <mu2>0.1</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
     </gazebo>
   </xacro:if>
 </xacro:macro>
