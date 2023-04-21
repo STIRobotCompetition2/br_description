@@ -94,7 +94,7 @@
   </xacro:if>
   
 
-  <xacro:if value="$(arg sim)">
+  <!-- <xacro:if value="$(arg sim)">
     <xacro:diffdrive sim="$(arg sim)"/>
     <xacro:imu sim="$(arg sim)" sim_noise="0.01" parent="base_link">
       <origin xyz="0 0 0.3" rpy="0 0 0"/>
@@ -107,13 +107,13 @@
     <xacro:rplidar_a1m8 sim="$(arg sim)" sim_noise="0.01" parent="base_link">
       <origin xyz="0 0 0.35" rpy="0 0 0"/>
     </xacro:rplidar_a1m8>
-  </xacro:if>
+  </xacro:if> -->
   
-  <xacro:unless value="$(arg sim)">
+  <!-- <xacro:unless value="$(arg sim)"> -->
     <xacro:nav_unit parent="base_link">
       <origin xyz="-0.18 0 0.235" rpy="0 0 3.14"/>
     </xacro:nav_unit>
-  </xacro:unless>
+  <!-- </xacro:unless> -->
   
 
 
